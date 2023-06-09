@@ -2,6 +2,8 @@
 using ECommerce.Infrastructure.Enums;
 using Microsoft.Extensions.DependencyInjection;
 using ECommerce.Infrastructure.Services.Storage;
+using ECommerce.Application.Abstractions.Token;
+using ECommerce.Infrastructure.Services.Token;
 
 namespace ECommerce.Infrastructure
 {
@@ -10,6 +12,8 @@ namespace ECommerce.Infrastructure
         public static void AddInfrastructureServices(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddScoped<IStorageService, StorageService>();
+            serviceCollection.AddScoped<ITokenHandler, TokenHandler>();
+
         }
         public static void AddStorage<T>(this IServiceCollection serviceCollection) where T : Storage, IStorage
         {
