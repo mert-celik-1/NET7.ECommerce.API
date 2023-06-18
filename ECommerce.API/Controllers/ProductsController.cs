@@ -1,4 +1,5 @@
-﻿using ECommerce.Application.Features.Commands.CreateProduct;
+﻿using ECommerce.Application.Features.Commands.ChangeShowcaseImage;
+using ECommerce.Application.Features.Commands.CreateProduct;
 using ECommerce.Application.Features.Commands.RemoveProduct;
 using ECommerce.Application.Features.Commands.RemoveProductImage;
 using ECommerce.Application.Features.Commands.UpdateProduct;
@@ -15,7 +16,6 @@ namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = "Admin")]
     public class ProductsController : ControllerBase
     {
         readonly IMediator _mediator;
@@ -39,6 +39,7 @@ namespace ECommerce.API.Controllers
             return Ok(response);
         }
 
+        [Authorize(AuthenticationSchemes = "Admin")]
         [HttpPost]
         public async Task<IActionResult> Post(CreateProductCommandRequest createProductCommandRequest)
         {
@@ -46,6 +47,7 @@ namespace ECommerce.API.Controllers
             return StatusCode((int)HttpStatusCode.Created);
         }
 
+        [Authorize(AuthenticationSchemes = "Admin")]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateProductCommandRequest updateProductCommandRequest)
         {
@@ -53,6 +55,7 @@ namespace ECommerce.API.Controllers
             return Ok();
         }
 
+        [Authorize(AuthenticationSchemes = "Admin")]
         [HttpDelete("{Id}")]
         public async Task<IActionResult> Delete([FromRoute] RemoveProductCommandRequest removeProductCommandRequest)
         {
@@ -60,6 +63,7 @@ namespace ECommerce.API.Controllers
             return Ok();
         }
 
+        [Authorize(AuthenticationSchemes = "Admin")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Upload([FromQuery] UploadProductImageCommandRequest uploadProductImageCommandRequest)
         {
@@ -68,6 +72,7 @@ namespace ECommerce.API.Controllers
             return Ok();
         }
 
+        [Authorize(AuthenticationSchemes = "Admin")]
         [HttpGet("[action]/{id}")]
         public async Task<IActionResult> GetProductImages([FromRoute] GetProductImagesQueryRequest getProductImagesQueryRequest)
         {
@@ -75,6 +80,7 @@ namespace ECommerce.API.Controllers
             return Ok(response);
         }
 
+        [Authorize(AuthenticationSchemes = "Admin")]
         [HttpDelete("[action]/{id}")]
         public async Task<IActionResult> DeleteProductImage([FromRoute] RemoveProductImageCommandRequest removeProductImageCommandRequest, [FromQuery] string imageId)
         {
@@ -84,6 +90,14 @@ namespace ECommerce.API.Controllers
             removeProductImageCommandRequest.ImageId = imageId;
             RemoveProductImageCommandResponse response = await _mediator.Send(removeProductImageCommandRequest);
             return Ok();
+        }
+
+        [HttpGet("[action]")]
+        [Authorize(AuthenticationSchemes = "Admin")]
+        public async Task<IActionResult> ChangeShowcaseImage([FromQuery] ChangeShowcaseImageCommandRequest changeShowcaseImageCommandRequest)
+        {
+            ChangeShowcaseImageCommandResponse response = await _mediator.Send(changeShowcaseImageCommandRequest);
+            return Ok(response);
         }
 
     }
