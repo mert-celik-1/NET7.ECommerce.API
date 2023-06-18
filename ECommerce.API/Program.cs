@@ -17,19 +17,21 @@ using Serilog.Sinks.PostgreSQL;
 using System.Security.Claims;
 using System.Text;
 using ECommerce.API.Extensions;
+using ECommerce.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
 builder.Services.AddApplicationServices();
+builder.Services.AddSignalRServices();
 
 //builder.Services.AddStorage<LocalStorage>();
 builder.Services.AddStorage<AzureStorage>();
 //builder.Services.AddStorage();
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(policy =>
-    policy.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod()
+    policy.WithOrigins("http://localhost:4200", "https://localhost:4200").AllowAnyHeader().AllowAnyMethod().AllowCredentials()
 ));
 
 Logger log = new LoggerConfiguration()
@@ -116,5 +118,5 @@ app.Use(async (context, next) =>
 });
 
 app.MapControllers();
-
+app.MapHubs();
 app.Run();

@@ -24,7 +24,7 @@ namespace ECommerce.Application.Features.Commands.FacebookLogin
 
         public async Task<FacebookLoginCommandResponse> Handle(FacebookLoginCommandRequest request, CancellationToken cancellationToken)
         {
-            var token = await _authService.FacebookLoginAsync(request.AuthToken, 15);
+            var token = await _authService.FacebookLoginAsync(request.AuthToken, 900);
             return new()
             {
                 Token = token
