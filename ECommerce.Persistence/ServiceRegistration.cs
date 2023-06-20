@@ -19,6 +19,10 @@ using ECommerce.Persistence.Repositories.ProductImageFile;
 using ECommerce.Domain.Entities.Identity;
 using ECommerce.Application.Abstractions.Services;
 using ECommerce.Persistence.Services;
+using ECommerce.Application.Repositories.Basket;
+using ECommerce.Application.Repositories.BasketItem;
+using ECommerce.Persistence.Repositories.Basket;
+using ECommerce.Persistence.Repositories.BasketItem;
 
 namespace ECommerce.Persistence
 {
@@ -51,9 +55,16 @@ namespace ECommerce.Persistence
             services.AddScoped<IProductImageFileWriteRepository, ProductImageFileWriteRepository>();
             services.AddScoped<IInvoiceFileReadRepository, InvoiceFileReadRepository>();
             services.AddScoped<IInvoiceFileWriteRepository, InvoiceFileWriteRepository>();
+            services.AddScoped<IBasketItemReadRepository, BasketItemReadRepository>();
+            services.AddScoped<IBasketItemWriteRepository, BasketItemWriteRepository>();
+            services.AddScoped<IBasketReadRepository, BasketReadRepository>();
+            services.AddScoped<IBasketWriteRepository, BasketWriteRepository>();
+
 
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IBasketService, BasketService>();
+
 
         }
     }

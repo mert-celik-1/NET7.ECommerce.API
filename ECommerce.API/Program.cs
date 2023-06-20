@@ -20,7 +20,7 @@ using ECommerce.API.Extensions;
 using ECommerce.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.AddPersistenceServices();
 builder.Services.AddInfrastructureServices();
 builder.Services.AddApplicationServices();

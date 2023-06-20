@@ -15,5 +15,7 @@ namespace ECommerce.Domain.Entities
 
         public ICollection<Product> Products { get; set; }
         public Customer Customer { get; set; }
+        public Basket Basket { get; set; }
+
     }
 }
