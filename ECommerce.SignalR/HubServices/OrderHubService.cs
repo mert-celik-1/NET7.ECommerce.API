@@ -1,4 +1,5 @@
 ﻿using ECommerce.Application.Abstractions.Hubs;
+using ECommerce.SignalR.Hubs;
 using Microsoft.AspNetCore.SignalR;
 using System;
 using System.Collections.Generic;
