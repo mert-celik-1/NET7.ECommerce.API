@@ -12,6 +12,8 @@ namespace ECommerce.Domain.Entities
         public string Description { get; set; }
         public string Address { get; set; }
         public Basket Basket { get; set; }
+        public string OrderCode { get; set; }
+
 
     }
 }
